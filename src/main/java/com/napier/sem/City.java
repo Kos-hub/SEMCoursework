@@ -10,4 +10,8 @@ public class City {
     public String district;
     public int population;
 
+    @Override
+    public String toString() {
+        return ID + " " + name + " " + country + " " + district + " " + population;
+    }
 }
