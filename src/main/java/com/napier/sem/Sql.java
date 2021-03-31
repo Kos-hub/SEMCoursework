@@ -68,33 +68,28 @@ public class Sql {
         return null;
     }
 
-    public void getCity(Connection con){
+    public void getCountriesByPopulation(Connection con){
         try{
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT " +
-                    "  name " +
-                    "  ,population " +
-                    "FROM " +
-                    "  city " +
-                    "ORDER BY " +
-                    "  population DESC;";
+            String strSelect = "SELECT code, name, continent, region, population, capital FROM country ORDER BY population DESC;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
             while(rset.next()){
-                City city = new City();
-                //city.ID = rset.getInt("ID");
-                city.name = rset.getString("Name");
-                //city.country = rset.getString("CountryCode");
-                //city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
 
-                System.out.println(city.name + " " + city.population);
+                System.out.println(country);
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city");
+            System.out.println("Failed to get countries");
         }
     }
 

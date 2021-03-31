@@ -12,8 +12,7 @@ public class App {
     {
         Sql db = new Sql();
         Connection con = db.connect();
-        db.getCity(con);
-        //db.displayCity(c);
+        db.getCountriesByPopulation(con);
         db.disconnect();
     }
 
