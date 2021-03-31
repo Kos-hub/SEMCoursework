@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Sql {
     /**
-     * Connection to MySQL database
+     * Connection to MySQL database.
      */
     private Connection con = null;
 
