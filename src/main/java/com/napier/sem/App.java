@@ -13,7 +13,8 @@ public class App {
         Sql db = new Sql();
         Connection con = db.connect();
         //db.getCountriesByPopulation(con);
-        db.getCountriesByContinent(con, "Europe");
+        //db.getCountriesByContinent(con, "Europe");
+        db.getCountriesByRegion(con, "Western Europe");
         db.disconnect();
     }
 
