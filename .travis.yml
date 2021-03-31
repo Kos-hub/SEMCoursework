@@ -17,6 +17,12 @@ install:
 before_script:
   - mvn clean
 
+branches:
+  only:
+    - master
+    - develop
+    - release
+
 jobs:
   include:
     - stage: unit tests
