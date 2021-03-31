@@ -15,7 +15,9 @@ public class App {
         //db.getCountriesByPopulation(con);
         //db.getCountriesByContinent(con, "Europe");
         //db.getCountriesByRegion(con, "Western Europe");
-        db.topNWorld(con, 5);
+        //db.topNWorld(con, 5);
+        //db.topNContinent(con, "Europe", 6);
+        db.topNRegion(con, "Western Europe", 7);
         db.disconnect();
     }
 

@@ -179,6 +179,64 @@ public class Sql {
         }
     }
 
+    public void topNContinent(Connection con, String continent, int limit){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT code, name, continent, region, population, capital " +
+                    "FROM country " +
+                    "WHERE continent = '" + continent + "'" +
+                    "ORDER BY population DESC " +
+                    "LIMIT " + limit + " ;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+
+                System.out.println(country);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+        }
+    }
+
+    public void topNRegion(Connection con, String region, int limit){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT code, name, continent, region, population, capital " +
+                    "FROM country " +
+                    "WHERE region = '" + region + "'" +
+                    "ORDER BY population DESC " +
+                    "LIMIT " + limit + " ;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+
+                System.out.println(country);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+        }
+    }
+
     public void disconnect()
     {
         if(con != null)
