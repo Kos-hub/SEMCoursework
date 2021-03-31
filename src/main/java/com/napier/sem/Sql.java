@@ -68,13 +68,13 @@ public class Sql {
         return null;
     }
 
-    public void getCountriesByPopulation(Connection con){
+    public void getCountriesByWorld(Connection con){
         try{
             Statement stmt = con.createStatement();
 
             String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country ORDER BY " +
-                    "population DESC;";
+                    "FROM country " +
+                    "ORDER BY population DESC;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
             while(rset.next()){
@@ -101,7 +101,7 @@ public class Sql {
 
             String strSelect = "SELECT code, name, continent, region, population, capital " +
                     "FROM country " +
-                    "WHERE continent = '" + continent + "' " +
+                    "WHERE continent LIKE '" + continent + "' " +
                     "ORDER BY population DESC;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -129,7 +129,7 @@ public class Sql {
 
             String strSelect = "SELECT code, name, continent, region, population, capital " +
                     "FROM country " +
-                    "WHERE region = '" + region + "' " +
+                    "WHERE region LIKE '" + region + "' " +
                     "ORDER BY population DESC;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -185,9 +185,9 @@ public class Sql {
 
             String strSelect = "SELECT code, name, continent, region, population, capital " +
                     "FROM country " +
-                    "WHERE continent = '" + continent + "'" +
+                    "WHERE continent LIKE '" + continent + "'" +
                     "ORDER BY population DESC " +
-                    "LIMIT " + limit + " ;";
+                    "LIMIT " + limit + ";";
             ResultSet rset = stmt.executeQuery(strSelect);
 
             while(rset.next()){
@@ -214,9 +214,9 @@ public class Sql {
 
             String strSelect = "SELECT code, name, continent, region, population, capital " +
                     "FROM country " +
-                    "WHERE region = '" + region + "'" +
+                    "WHERE region LIKE '" + region + "'" +
                     "ORDER BY population DESC " +
-                    "LIMIT " + limit + " ;";
+                    "LIMIT " + limit + ";";
             ResultSet rset = stmt.executeQuery(strSelect);
 
             while(rset.next()){
@@ -229,6 +229,97 @@ public class Sql {
                 country.capital = rset.getInt("Capital");
 
                 System.out.println(country);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+        }
+    }
+
+    public void getCitiesInWorld(Connection con){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT name, countryCode, district, population " +
+                    "FROM city " +
+                    "ORDER BY population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                City country = new City();
+                country.name = rset.getString("Name");
+                country.country = rset.getString("countryCode");
+                country.district = rset.getString("District");
+                country.population = rset.getInt("Population");
+
+                System.out.println(country);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+        }
+    }
+
+    public void getCitiesInContinent(Connection con, String continent){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT\n" +
+                    "  city.name AS Name\n" +
+                    "  ,city.CountryCode\n" +
+                    "  ,city.Population\n" +
+                    "  ,city.District\n" +
+                    "FROM\n" +
+                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
+                    "WHERE\n" +
+                    "  continent LIKE '"+ continent +"'\n" +
+                    "ORDER BY\n" +
+                    "  city.population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country = rset.getString("CountryCode");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+
+                System.out.println(city);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+        }
+    }
+
+    public void getCitiesInRegion(Connection con, String region){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT\n" +
+                    "  city.name\n" +
+                    "  ,city.population\n" +
+                    "  ,city.district\n" +
+                    "  ,city.CountryCode\n" +
+                    "FROM\n" +
+                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
+                    "WHERE\n" +
+                    "  region LIKE '" + region + "'\n" +
+                    "ORDER BY\n" +
+                    "  city.population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country = rset.getString("CountryCode");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+
+                System.out.println(city);
             }
         }
         catch (Exception e){

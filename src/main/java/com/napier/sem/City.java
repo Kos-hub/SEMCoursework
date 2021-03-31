@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class City {
 
-    public int ID;
     public String name;
     public String country;
     public String district;
@@ -12,6 +11,6 @@ public class City {
 
     @Override
     public String toString() {
-        return ID + " " + name + " " + country + " " + district + " " + population;
+        return name + " " + country + " " + district + " " + population;
     }
 }
