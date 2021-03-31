@@ -46,7 +46,7 @@ jobs:
       deploy:
         provider: releases
         api_key: $GITHUB_OAUTH_TOKEN
-        file: $TRAVIS_BUILD_DIR/target/seMethods.jar
+        file: $TRAVIS_BUILD_DIR/target/semCoursework.jar
         skip_cleanup: true
 
 stages:
