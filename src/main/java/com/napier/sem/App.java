@@ -22,6 +22,11 @@ public class App {
         //db.getCitiesInWorld(con);
         //db.getCitiesInContinent(con, "Europe");
         //db.getCitiesInRegion(con, "Western Europe");
+        //db.getCitiesInCountry(con, "Laos");
+        //db.getCitiesInDistrict(con, "Viangchan");
+        //db.topNCities(con, 4);
+        //db.topNCitiesInContinent(con, "Europe", 4);
+        //db.topNCitiesInRegion(con, "Western Europe", 4);
         db.disconnect();
     }
 
