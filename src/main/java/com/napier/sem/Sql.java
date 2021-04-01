@@ -494,6 +494,73 @@ public class Sql {
         }
     }
 
+    public void topNCitiesInCountry(Connection con, String country, int limit){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT\n" +
+                    "  city.name\n" +
+                    "  ,city.CountryCode" +
+                    "  ,city.district" +
+                    "  ,city.population\n" +
+                    "FROM\n" +
+                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
+                    "WHERE\n" +
+                    "  country.name LIKE '" + country + "'\n" +
+                    "ORDER BY\n" +
+                    "  city.population DESC\n" +
+                    "LIMIT "+ limit + ";";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country = rset.getString("CountryCode");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+
+                System.out.println(city);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Cities");
+        }
+    }
+
+    public void topNCitiesInDistrict(Connection con, String district, int limit){
+        try{
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT\n" +
+                    "  city.name\n" +
+                    "  ,city.CountryCode" +
+                    "  ,city.district" +
+                    "  ,city.population\n" +
+                    "FROM\n" +
+                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
+                    "WHERE\n" +
+                    "  city.district LIKE '" + district + "'\n" +
+                    "ORDER BY\n" +
+                    "  city.population DESC\n" +
+                    "LIMIT "+ limit + ";";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while(rset.next()){
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country = rset.getString("CountryCode");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+
+                System.out.println(city);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Cities");
+        }
+    }
     public void disconnect()
     {
         if(con != null)

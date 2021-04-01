@@ -27,6 +27,8 @@ public class App {
         //db.topNCities(con, 4);
         //db.topNCitiesInContinent(con, "Europe", 4);
         //db.topNCitiesInRegion(con, "Western Europe", 4);
+        //db.topNCitiesInCountry(con, "Paraguay", 4);
+        db.topNCitiesInDistrict(con, "Viangchan",4);
         db.disconnect();
     }
 
