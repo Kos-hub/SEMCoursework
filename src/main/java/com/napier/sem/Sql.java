@@ -68,6 +68,10 @@ public class Sql {
         return null;
     }
 
+    /**
+     * @param con
+     * @return All the countries in the world organised by largest population to smallest.
+     */
     public void getCountriesByWorld(Connection con){
         try{
             Statement stmt = con.createStatement();
@@ -95,6 +99,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param continent The specific continent we want to look at in the query.
+     * @return All the countries in a continent organised by largest population to smallest.
+     */
     public void getCountriesByContinent(Connection con, String continent){
         try{
             Statement stmt = con.createStatement();
@@ -123,6 +132,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param region The specific region we want to look at in the query.
+     * @return All the countries in a region organised by largest population to smallest.
+     */
     public void getCountriesByRegion(Connection con, String region){
         try{
             Statement stmt = con.createStatement();
@@ -151,7 +165,12 @@ public class Sql {
         }
     }
 
-    public void topNWorld(Connection con, int limit){
+    /**
+     * @param con
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated countries in the world where N is provided by the user. (N = limit)
+     */
+    public void topNCountriesInWorld(Connection con, int limit){
         try{
             Statement stmt = con.createStatement();
 
@@ -179,7 +198,13 @@ public class Sql {
         }
     }
 
-    public void topNContinent(Connection con, String continent, int limit){
+    /**
+     * @param con
+     * @param continent The specific continent we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated countries in a continent where N is provided by the user. (N = limit)
+     */
+    public void topNCountriesInContinent(Connection con, String continent, int limit){
         try{
             Statement stmt = con.createStatement();
 
@@ -208,7 +233,13 @@ public class Sql {
         }
     }
 
-    public void topNRegion(Connection con, String region, int limit){
+    /**
+     * @param con
+     * @param region The specific region we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated countries in a region where N is provided by the user. (N = limit)
+     */
+    public void topNCountriesInRegion(Connection con, String region, int limit){
         try{
             Statement stmt = con.createStatement();
 
@@ -237,6 +268,10 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @return All the cities in the world organised by largest population to smallest.
+     */
     public void getCitiesInWorld(Connection con){
         try{
             Statement stmt = con.createStatement();
@@ -262,6 +297,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param continent The specific continent we want to look at in the query.
+     * @return All the cities in a continent organised by largest population to smallest.
+     */
     public void getCitiesInContinent(Connection con, String continent){
         try{
             Statement stmt = con.createStatement();
@@ -295,6 +335,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param region The specific region we want to look at in the query.
+     * @return All the cities in a region organised by largest population to smallest.
+     */
     public void getCitiesInRegion(Connection con, String region){
         try{
             Statement stmt = con.createStatement();
@@ -328,6 +373,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param country The specific country we want to look at in the query.
+     * @return All the cities in a country organised by largest population to smallest.
+     */
     public void getCitiesInCountry(Connection con, String country){
         try{
             Statement stmt = con.createStatement();
@@ -361,6 +411,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param district The specific district we want to look at in the query.
+     * @return All the cities in a district organised by largest population to smallest.
+     */
     public void getCitiesInDistrict(Connection con, String district){
         try{
             Statement stmt = con.createStatement();
@@ -394,6 +449,11 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated cities in the world where N is provided by the user.
+     */
     public void topNCities(Connection con, int limit){
         try{
             Statement stmt = con.createStatement();
@@ -426,6 +486,12 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param continent The specific continent we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated cities in a continent where N is provided by the user.
+     */
     public void topNCitiesInContinent(Connection con, String continent, int limit){
         try{
             Statement stmt = con.createStatement();
@@ -460,6 +526,12 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param region The specific region we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated cities in a region where N is provided by the user.
+     */
     public void topNCitiesInRegion(Connection con, String region, int limit){
         try{
             Statement stmt = con.createStatement();
@@ -494,6 +566,12 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param country The specific country we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated cities in a country where N is provided by the user.
+     */
     public void topNCitiesInCountry(Connection con, String country, int limit){
         try{
             Statement stmt = con.createStatement();
@@ -528,6 +606,12 @@ public class Sql {
         }
     }
 
+    /**
+     * @param con
+     * @param district The specific district we want to look at in the query.
+     * @param limit The specific amount of rows we want to have.
+     * @return The top N populated cities in a district where N is provided by the user.
+     */
     public void topNCitiesInDistrict(Connection con, String district, int limit){
         try{
             Statement stmt = con.createStatement();
@@ -561,6 +645,8 @@ public class Sql {
             System.out.println("Failed to get Cities");
         }
     }
+
+
     public void disconnect()
     {
         if(con != null)
