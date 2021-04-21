@@ -1,14 +1,13 @@
 package com.napier.sem;
 
-public class CountryLanguage {
-    public String countryCode;
-    public String language;
-    public boolean isOfficial;
-    public double percentage;
+import java.sql.*;
 
-    @Override
-    public String toString() {
-        return countryCode + " " + language + " " + isOfficial + " " + percentage;
-    }
+public class CountryLanguage {
+
+    public String CountryCode;
+    public String Language;
+    public boolean IsOfficial;
+    public float Percentage;
+
 
 }
