@@ -2,7 +2,7 @@
 
 -- This is a file as part of my exploratory SQL queries to gather the required data for the SEM coursework.
 
--- As a member of the team I want to produce a list of all the cities in the world, continent, region, country or district organised by largest population to smallest so that the requirements of the coursework are met.
+-- As a member of the team I want to produce a list of all the countries in the world, continent, or region organised by largest population to smallest so that the requirements of the coursework are met.
 
 
 -- of world

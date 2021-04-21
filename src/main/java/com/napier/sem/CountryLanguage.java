@@ -10,4 +10,5 @@ public class CountryLanguage {
     public String toString() {
         return countryCode + " " + language + " " + isOfficial + " " + percentage;
     }
+
 }

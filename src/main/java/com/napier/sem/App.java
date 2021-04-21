@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args)
     {
         Sql db = new Sql();
-        Connection con = db.connect();
+        Connection con = db.connect("sql:3306");
 
         //db.getCountriesByPopulation(con);
         //db.getCountriesByContinent(con, "Europe");
@@ -29,6 +29,7 @@ public class App {
         //db.topNCitiesInRegion(con, "Western Europe", 4);
         //db.topNCitiesInCountry(con, "Paraguay", 4);
         db.topNCitiesInDistrict(con, "Viangchan",4);
+
         db.disconnect();
     }
 

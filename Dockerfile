@@ -6,7 +6,7 @@
 #     Build your project before running this dockerfile.
 #     Delete existing docker containers.
 #COPY target/classes /tmp
-#COPY ./target/seMethods-0.1.0.1-jar-with-dependencies.jar /tmp
+#COPY ./target/seMethods-0.1.0.3-jar-with-dependencies.jar /tmp
 #WORKDIR /tmp
 #CMD ["echo", "-----------------------------------------> Running TestJavaProject_JBT..."]
 #ENTRYPOINT ["java", "com.napier.sem.App"]
@@ -16,6 +16,6 @@
 
 FROM openjdk:latest
 # Ensure both this and the ENTRYPOINT target the right .jar file in your ./target/ folder.
-COPY ./target/seMethods-0.1.0.3-jar-with-dependencies.jar /tmp
+COPY ./target/semCoursework.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "seMethods-0.1.0.3-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "semCoursework.jar", "sql:3306"]
