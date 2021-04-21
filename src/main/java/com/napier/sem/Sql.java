@@ -133,10 +133,10 @@ public class Sql {
             while (rset.next())
             {
                 Country country = new Country();
-                country.Name = rset.getString("Name");
-                country.Population = rset.getInt("Population");
+                country.Name = rset.getString("name");
+                country.Population = rset.getInt("population");
 
-                System.out.println(country.Name + " " + country.Population);
+                System.out.println(country.name + " " + country.population);
                 return country;
             }
         }
