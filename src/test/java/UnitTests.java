@@ -394,8 +394,8 @@ public class UnitTests {
             ArrayList<Country> returnValue = db.getCountriesByPopulationWorld(con, 10);
             // Assert
             assertEquals(returnValue.size(), 10);
-            assertEquals(returnValue.get(9).Name, "Nigeria");
-            assertEquals(returnValue.get(9).Population,111506000);
+            assertEquals(returnValue.get(9).name, "Nigeria");
+            assertEquals(returnValue.get(9).population,111506000);
         // Extreme input
             // Act
             returnValue = db.getCountriesByPopulationWorld(con, 0);
@@ -419,8 +419,8 @@ public class UnitTests {
             ArrayList<Country> returnValue = db.getCountriesByPopulationContinent(con, "Africa", 5);
             // Assert
             assertEquals(returnValue.size(), 5);
-            assertEquals(returnValue.get(1).Name, "Egypt");
-            assertEquals(returnValue.get(1).Population,68470000);
+            assertEquals(returnValue.get(1).name, "Egypt");
+            assertEquals(returnValue.get(1).population,68470000);
         // Extreme input
             // Act
             returnValue = db.getCountriesByPopulationContinent(con, "Africa", 0);
@@ -448,8 +448,8 @@ public class UnitTests {
             ArrayList<Country> returnValue = db.getCountriesByPopulationRegion(con, "Southeast Asia", 6);
             // Assert
             assertEquals(returnValue.size(), 6);
-            assertEquals(returnValue.get(1).Name, "Vietnam");
-            assertEquals(returnValue.get(1).Population,79832000);
+            assertEquals(returnValue.get(1).name, "Vietnam");
+            assertEquals(returnValue.get(1).population,79832000);
         // Extreme input
             // Act
             returnValue = db.getCountriesByPopulationRegion(con, "Southeast Asia", 0);
