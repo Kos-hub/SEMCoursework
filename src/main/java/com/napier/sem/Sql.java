@@ -46,7 +46,7 @@ public class Sql {
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + i);
+                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
@@ -71,247 +71,23 @@ public class Sql {
     }
 
     /**
-     * @param con Instance of a database connection.
+     * @param con
+     * @return Returns a city by querying the database with an already-given query.
      */
-    public void getCountriesByWorld(Connection con){
-        try{
+    public City getCity(Connection con)
+    {
+        try
+        {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "ORDER BY population DESC;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param continent Instance of a database connection.
-     */
-    public void getCountriesByContinent(Connection con, String continent){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "WHERE continent LIKE '" + continent + "' " +
-                    "ORDER BY population DESC;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param region The specific region we want to look at in the query.
-     */
-    public void getCountriesByRegion(Connection con, String region){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "WHERE region LIKE '" + region + "' " +
-                    "ORDER BY population DESC;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCountriesInWorld(Connection con, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "ORDER BY population DESC " +
-                    "LIMIT " + limit + " ;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param continent Instance of a database connection.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCountriesInContinent(Connection con, String continent, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "WHERE continent LIKE '" + continent + "'" +
-                    "ORDER BY population DESC " +
-                    "LIMIT " + limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param region The specific region we want to look at in the query.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCountriesInRegion(Connection con, String region, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT code, name, continent, region, population, capital " +
-                    "FROM country " +
-                    "WHERE region LIKE '" + region + "'" +
-                    "ORDER BY population DESC " +
-                    "LIMIT " + limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     */
-    public void getCitiesInWorld(Connection con){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT name, countryCode, district, population " +
-                    "FROM city " +
-                    "ORDER BY population DESC;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City country = new City();
-                country.name = rset.getString("Name");
-                country.country = rset.getString("countryCode");
-                country.district = rset.getString("District");
-                country.population = rset.getInt("Population");
-
-                System.out.println(country);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param continent Instance of a database connection.
-     */
-    public void getCitiesInContinent(Connection con, String continent){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name AS Name\n" +
-                    "  ,city.CountryCode\n" +
-                    "  ,city.Population\n" +
-                    "  ,city.District\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  continent LIKE '"+ continent +"'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC;";
-
+            String strSelect = "SELECT " +
+                    "  name " +
+                    "  ,population " +
+                    "FROM " +
+                    "  city " +
+                    "ORDER BY " +
+                    "  population DESC " +
+                    "LIMIT 1;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
 
@@ -319,327 +95,97 @@ public class Sql {
             {
                 City city = new City();
                 city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
                 city.population = rset.getInt("Population");
 
-                System.out.println(city);
-
+                System.out.println(city.name + " " + city.population);
+                return city;
             }
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-
+            System.out.println("Failed to get city");
+            return null;
         }
+        return null;
     }
 
     /**
-     * @param con Instance of a database connection.
-     * @param region The specific region we want to look at in the query.
+     * @param con
+     * @return Returns a country by querying the database with an already-given query.
      */
-    public void getCitiesInRegion(Connection con, String region){
-        try{
+    public Country getCountry(Connection con)
+    {
+        try
+        {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.population\n" +
-                    "  ,city.district\n" +
-                    "  ,city.CountryCode\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  region LIKE '" + region + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC;";
+            String strSelect = "SELECT " +
+                    "  name " +
+                    "  ,population " +
+                    "FROM " +
+                    "  country " +
+                    "ORDER BY " +
+                    "  population DESC " +
+                    "LIMIT 1;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+            while (rset.next())
+            {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.Population = rset.getInt("Population");
 
-                System.out.println(city);
+                System.out.println(country.Name + " " + country.Population);
+                return country;
             }
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
+            System.out.println("Failed to get country");
+            return null;
         }
+        return null;
     }
 
     /**
-     * @param con Instance of a database connection.
-     * @param country The specific country we want to look at in the query.
+     * @param con
+     * @return Returns a city by querying the database with an already-given query.
      */
-    public void getCitiesInCountry(Connection con, String country){
-        try{
+    public CountryLanguage getCountryLanguage(Connection con)
+    {
+        try
+        {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.population\n" +
-                    "  ,city.district\n" +
-                    "  ,city.CountryCode\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  country.name LIKE '" + country + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC;";
+            String strSelect = "SELECT " +
+                    "  language " +
+                    "FROM " +
+                    "  countrylanguage " +
+                    "LIMIT 1;";
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
+            while (rset.next())
+            {
+                CountryLanguage countryLanguage = new CountryLanguage();
+                countryLanguage.Language = rset.getString("Language");
+                System.out.println(countryLanguage.Language);
+                return countryLanguage;
             }
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
+            System.out.println("Failed to get country");
+            return null;
         }
+        return null;
     }
 
     /**
-     * @param con Instance of a database connection.
-     * @param district The specific district we want to look at in the query.
+     * Disconnects the sql database
      */
-    public void getCitiesInDistrict(Connection con, String district){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.population\n" +
-                    "  ,city.district\n" +
-                    "  ,city.CountryCode\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  city.district LIKE '" + district + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC;";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCities(Connection con, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  name\n" +
-                    "  ,CountryCode\n" +
-                    "  ,district\n" +
-                    "  ,population\n" +
-                    "FROM\n" +
-                    "  city\n" +
-                    "ORDER BY\n" +
-                    "  population DESC\n" +
-                    "LIMIT "+ limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param continent Instance of a database connection.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCitiesInContinent(Connection con, String continent, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.CountryCode\n" +
-                    "  ,city.district\n" +
-                    "  ,city.population\n" +
-                    "FROM\n" +
-                    "(city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  continent LIKE '"+ continent + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC\n" +
-                    "LIMIT "+ limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param region The specific region we want to look at in the query.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCitiesInRegion(Connection con, String region, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.CountryCode" +
-                    "  ,city.district" +
-                    "  ,city.population\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  region LIKE '" + region + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC\n" +
-                    "LIMIT "+ limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param country The specific country we want to look at in the query.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCitiesInCountry(Connection con, String country, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.CountryCode" +
-                    "  ,city.district" +
-                    "  ,city.population\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  country.name LIKE '" + country + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC\n" +
-                    "LIMIT "+ limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-    /**
-     * @param con Instance of a database connection.
-     * @param district The specific district we want to look at in the query.
-     * @param limit The specific amount of rows we want to have.
-     */
-    public void topNCitiesInDistrict(Connection con, String district, int limit){
-        try{
-            Statement stmt = con.createStatement();
-
-            String strSelect = "SELECT\n" +
-                    "  city.name\n" +
-                    "  ,city.CountryCode" +
-                    "  ,city.district" +
-                    "  ,city.population\n" +
-                    "FROM\n" +
-                    "  (city JOIN country ON city.CountryCode=country.Code)\n" +
-                    "WHERE\n" +
-                    "  city.district LIKE '" + district + "'\n" +
-                    "ORDER BY\n" +
-                    "  city.population DESC\n" +
-                    "LIMIT "+ limit + ";";
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            while(rset.next()){
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country = rset.getString("CountryCode");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
-
-                System.out.println(city);
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Cities");
-        }
-    }
-
-
-
     public void disconnect()
     {
         if(con != null)

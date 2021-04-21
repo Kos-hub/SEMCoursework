@@ -1,16 +1,23 @@
 package com.napier.sem;
 
-public class Country {
-    public String code;
-    public String name;
-    public String continent;
-    public String region;
-    public int population;
-    public int capital;
+import java.sql.*;
 
-    @Override
-    public String toString() {
-        return code + " " + name + " " + continent + " " + region + " " + population + " " + capital;
-    }
+public class Country {
+
+    public String Code;
+    public String name;
+    public String Continent;
+    public String Region;
+    public float SurfaceArea;
+    public int IndepYear;
+    public int population;
+    public float LifeExpectancy;
+    public float GNP;
+    public float GNPOld;
+    public String LocalName;
+    public String GovernmentForm;
+    public String HeadOfState;
+    public int Capital;
+    public String Code2;
 
 }
