@@ -333,7 +333,6 @@ public class Sql {
             System.out.println("Failed to get Cities");
 
         }
-        return null;
     }
 
     /**
