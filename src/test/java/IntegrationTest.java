@@ -31,8 +31,8 @@ public class IntegrationTest {
     void testGetCountry()
     {
         Country country = app.getCountry(con);
-        assertEquals(country.Name, "China");
-        assertEquals(country.Population, 1277558000);
+        assertEquals(country.name, "China");
+        assertEquals(country.population, 1277558000);
     }
 
     @Test
