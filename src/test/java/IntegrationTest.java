@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegrationTest {
-    static Sql app;
+    static SqlReturnsObjects app;
     static Connection con;
 
     @BeforeAll
     static void init()
     {
-        app = new Sql();
+        app = new SqlReturnsObjects();
         con = app.connect("localhost:33060"); //Give the localhost port otherwise tests will throw errors
     }
 
@@ -31,14 +31,14 @@ public class IntegrationTest {
     void testGetCountry()
     {
         Country country = app.getCountry(con);
-        assertEquals(country.Name, "China");
-        assertEquals(country.Population, 1277558000);
+        assertEquals(country.name, "China");
+        assertEquals(country.population, 1277558000);
     }
 
     @Test
     void testGetCountryLanguage()
     {
         CountryLanguage countryLanguage = app.getCountryLanguage(con);
-        assertEquals(countryLanguage.Language, "Dutch");
+        assertEquals(countryLanguage.language, "Dutch");
     }
 }
