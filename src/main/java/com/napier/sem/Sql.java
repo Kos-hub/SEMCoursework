@@ -20,7 +20,6 @@ public class Sql {
         {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
 
             // Connection to the database
             int retries = 2;
@@ -30,7 +29,7 @@ public class Sql {
                 try
                 {
                     // Wait a bit for db to start set to 30000 for travis
-                    Thread.sleep(30000);
+                    //Thread.sleep(30000);
                     // Connect to database
                     con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
@@ -70,7 +69,7 @@ public class Sql {
         return null;
 
     }
-
+    
     /**
      * @param con Instance of a database connection.
      */
