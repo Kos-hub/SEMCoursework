@@ -311,18 +311,24 @@ public class SqlReturnsObjects {
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
                             " WHERE " +
-                            "language LIKE \"";
+                            "language IN (Chinese, English, Hindi, Spanish, Arabic) " +
+                            " GROUP BY " +
+                            "language " +
+                            "ORDER BY " +
+                            "sum(language_speakers) DESC;";
 
+                            /*
                             strSelect += language.get(0);
                             for(int i = 1; i < language.size(); i++) {
                                 strSelect += "\" OR language LIKE \"" + language.get(i);
                             }
 
-                            strSelect +=
                             "\" GROUP BY " +
                             "language" +
                             " ORDER BY " +
                             "sum(language_speakers) DESC;";
+
+                             */
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<String> languageSpeakersPercentage = new ArrayList<String>();
