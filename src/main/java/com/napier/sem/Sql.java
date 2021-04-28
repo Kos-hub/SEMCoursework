@@ -69,7 +69,7 @@ public class Sql {
         return null;
 
     }
-
+    
     /**
      * @param con Instance of a database connection.
      */

@@ -18,6 +18,7 @@ public class App {
         Connection con = db.connect("sql:3306");
         Connection second_con = second_db.connect("sql:3306");
 
+
         db.getCountriesByWorld(con);
         System.out.println("----------------------------------------------------------------------------");
 
@@ -86,13 +87,31 @@ public class App {
             System.out.println(c);
         }
 
+
+
         System.out.println("----------------------------------------------------------------------------");
 
-        ArrayList<Long> languageSpeakers = new ArrayList<Long>();
-        languageSpeakers = second_db.getLanguageSpeakers(second_con, "English");
-        for(Long l : languageSpeakers){
-            System.out.println(l);
+        ArrayList<String> languageSpeakers = new ArrayList<>();
+        ArrayList<String> languageList = new ArrayList<>();
+        languageList.add("Chinese");
+        languageList.add("English");
+        languageList.add("Hindi");
+        languageList.add("Spanish");
+        languageList.add("Arabic");
+        languageSpeakers = second_db.getLanguageSpeakers(second_con, languageList);
+//        double popLanguage, popWorld, resultPercentage;
+        for (String outputLine : languageSpeakers) {
+            System.out.println(outputLine);
         }
+//        for (int i = 0; i < languageSpeakers.size(); i+=2) {
+//            System.out.println(languageList.get(i/2));
+//            System.out.println(languageSpeakers.get(i));
+//            popLanguage = languageSpeakers.get(i)/10000; // avoiding exceeding max size of a data type
+//            popWorld = languageSpeakers.get(i+1)/10000;
+//            resultPercentage = popLanguage / popWorld;
+//            System.out.println(resultPercentage*100+"%");
+//        }
+
 
         System.out.println("----------------------------------------------------------------------------");
 
