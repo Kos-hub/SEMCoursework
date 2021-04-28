@@ -20,6 +20,12 @@ public class Sql {
         {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
 
             // Connection to the database
             int retries = 2;
