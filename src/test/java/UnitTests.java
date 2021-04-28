@@ -5,6 +5,7 @@ import com.napier.sem.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
 public class UnitTests {
     Sql db = new Sql();
     Connection con = db.connect("sql:3306");
