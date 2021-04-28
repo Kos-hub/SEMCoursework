@@ -287,29 +287,29 @@ public class SqlReturnsObjects {
             Statement stmt = con.createStatement();
 
             String strSelect =
-                    "SELECT" +
+                    "SELECT " +
                             "language" +
                             ",sum(language_speakers) AS speakers" +
-                            ",((sum(language_speakers) / (SELECT" +
+                            ",((sum(language_speakers) / (SELECT " +
                             "sum(population)" +
-                            "FROM" +
+                            " FROM " +
                             "country))*100) AS percentage" +
-                            "FROM" +
+                            " FROM " +
                             "(" +
-                            "SELECT" +
+                            " SELECT " +
                             "country.name AS name" +
                             ",countrylanguage.language AS language" +
                             ",countrylanguage.percentage AS percentage" +
                             ",country.population AS total_population" +
                             ",FLOOR(country.population*(countrylanguage.percentage/100)) AS language_speakers" +
-                            "FROM" +
+                            " FROM " +
                             "(countrylanguage JOIN country ON countrylanguage.countrycode=country.code)" +
-                            "WHERE" +
+                            " WHERE " +
                             "countrylanguage.percentage > 0" +
-                            "ORDER BY" +
+                            " ORDER BY " +
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
-                            "WHERE" +
+                            " WHERE " +
                             "language LIKE \"";
 
                             strSelect += language.get(0);
@@ -318,9 +318,9 @@ public class SqlReturnsObjects {
                             }
 
                             strSelect +=
-                            "GROUP BY" +
+                            "\" GROUP BY " +
                             "language" +
-                            "ORDER BY" +
+                            " ORDER BY " +
                             "sum(language_speakers) DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);

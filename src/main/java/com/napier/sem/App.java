@@ -18,6 +18,7 @@ public class App {
         Connection con = db.connect("sql:3306");
         Connection second_con = second_db.connect("sql:3306");
 
+
         db.getCountriesByWorld(con);
         System.out.println("----------------------------------------------------------------------------");
 
@@ -85,6 +86,8 @@ public class App {
         for(City c : capitalCitiesByRegion){
             System.out.println(c);
         }
+
+
 
         System.out.println("----------------------------------------------------------------------------");
 
