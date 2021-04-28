@@ -282,13 +282,14 @@ public class SqlReturnsObjects {
      * @param language This method should take a language as a String argument.
      * @return This method returns an ArrayList containing 2 longs: the population followed by the world population, from which the percentage can be easily derived.
      */
-    public ArrayList<Long> getLanguageSpeakers(Connection con, ArrayList<String> language) {
+    public ArrayList<String> getLanguageSpeakers(Connection con, ArrayList<String> language) {
         try {
             Statement stmt = con.createStatement();
 
             String strSelect =
                     "SELECT " +
-                            "language" +
+                            "country.name AS name" +
+                            ",language" +
                             ",sum(language_speakers) AS speakers" +
                             ",(SELECT " +
                             "sum(population)" +
@@ -324,11 +325,19 @@ public class SqlReturnsObjects {
                             "sum(language_speakers) DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<Long> languageSpeakersPercentage = new ArrayList<Long>();
+            ArrayList<String> languageSpeakersPercentage = new ArrayList<String>();
+
 
             while (rset.next()) {
-                languageSpeakersPercentage.add(rset.getLong("speakers"));
-                languageSpeakersPercentage.add(rset.getLong("worldPop"));
+                languageSpeakersPercentage.add(rset.getString("name"));
+                long speakers = rset.getLong("speakers");
+                languageSpeakersPercentage.add(speakers+""); // Long to String hack
+                double popLanguage, popWorld, resultPercentage;
+                popLanguage = speakers/10000; // avoiding exceeding max size of a data type
+                popWorld = rset.getLong("worldPop")/10000;
+                resultPercentage = popLanguage / popWorld;
+                resultPercentage = (double)Math.round(resultPercentage * 100d) / 100d; // to 2 decimal places
+                languageSpeakersPercentage.add(resultPercentage+"%");
             }
             return languageSpeakersPercentage;
         } catch (Exception e) {

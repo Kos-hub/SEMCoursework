@@ -232,15 +232,15 @@ public class UnitTests {
         // Arrange & Act
         ArrayList<String> testLanguages = new ArrayList<>();
         testLanguages.add("Chinese");
-        ArrayList<Long> returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, testLanguages);
+        ArrayList<String> returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, testLanguages);
         // Assert
-        assertEquals(returnValue.get(0), 1191843539);
+        assertEquals(returnValue.get(1), "1191843539");
         // Act
         testLanguages.remove(0);
         testLanguages.add("Spanish");
         returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, testLanguages);
         // Assert
-        assertEquals(returnValue.get(0), 355029460);
+        assertEquals(returnValue.get(1), "355029460");
     }
 
     @Test

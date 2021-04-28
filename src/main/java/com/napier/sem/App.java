@@ -88,7 +88,7 @@ public class App {
 
         System.out.println("----------------------------------------------------------------------------");
 
-        ArrayList<Long> languageSpeakers = new ArrayList<Long>();
+        ArrayList<String> languageSpeakers;
         ArrayList<String> languageList = new ArrayList<>();
         languageList.add("Chinese");
         languageList.add("English");
@@ -96,11 +96,18 @@ public class App {
         languageList.add("Spanish");
         languageList.add("Arabic");
         languageSpeakers = second_db.getLanguageSpeakers(second_con, languageList);
-        for (int i = 0; i < languageSpeakers.size(); i+=2) {
-            System.out.println(languageList.get(i/2));
-            System.out.println(languageSpeakers.get(i));
-            System.out.println((languageSpeakers.get(i)/languageSpeakers.get(i+1))*100+"%");
+        double popLanguage, popWorld, resultPercentage;
+        for (String outputLine : languageSpeakers) {
+            System.out.println(outputLine);
         }
+//        for (int i = 0; i < languageSpeakers.size(); i+=2) {
+//            System.out.println(languageList.get(i/2));
+//            System.out.println(languageSpeakers.get(i));
+//            popLanguage = languageSpeakers.get(i)/10000; // avoiding exceeding max size of a data type
+//            popWorld = languageSpeakers.get(i+1)/10000;
+//            resultPercentage = popLanguage / popWorld;
+//            System.out.println(resultPercentage*100+"%");
+//        }
 
 
         System.out.println("----------------------------------------------------------------------------");
