@@ -282,7 +282,7 @@ public class SqlReturnsObjects {
      * @param language This method should take a language as a String argument.
      * @return This method returns an ArrayList containing 2 longs: the population followed by the world population, from which the percentage can be easily derived.
      */
-    public ArrayList<Long> getLanguageSpeakers(Connection con, String language) {
+    public ArrayList<String> getLanguageSpeakers(Connection con, ArrayList<String> language) {
         try {
             Statement stmt = con.createStatement();
 
@@ -290,10 +290,10 @@ public class SqlReturnsObjects {
                     "SELECT " +
                             "language" +
                             ",sum(language_speakers) AS speakers" +
-                            ",(SELECT " +
+                            ",((sum(language_speakers) / (SELECT " +
                             "sum(population)" +
                             " FROM " +
-                            "country) AS worldPop" +
+                            "country))*100) AS percentage" +
                             " FROM " +
                             "(" +
                             " SELECT " +
@@ -310,18 +310,36 @@ public class SqlReturnsObjects {
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
                             " WHERE " +
-                            "language LIKE \"" + language +
+                            "language LIKE \"";
+
+                            strSelect += language.get(0);
+                            for(int i = 1; i < language.size(); i++) {
+                                strSelect += "\" OR language LIKE \"" + language.get(i);
+                            }
+
+                            strSelect +=
                             "\" GROUP BY " +
                             "language" +
                             " ORDER BY " +
                             "sum(language_speakers) DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<Long> languageSpeakersPercentage = new ArrayList<Long>();
+            ArrayList<String> languageSpeakersPercentage = new ArrayList<String>();
+
 
             while (rset.next()) {
-                languageSpeakersPercentage.add(0,rset.getLong("speakers"));
-                languageSpeakersPercentage.add(1,rset.getLong("worldPop"));
+                languageSpeakersPercentage.add(rset.getString("language"));
+                languageSpeakersPercentage.add(rset.getString("speakers"));
+                languageSpeakersPercentage.add(rset.getString("percentage"));
+//                languageSpeakersPercentage.add(rset.getString("name"));
+//                long speakers = rset.getLong("speakers");
+//                languageSpeakersPercentage.add(speakers+""); // Long to String hack
+//                double popLanguage, popWorld, resultPercentage;
+//                popLanguage = speakers/10000; // avoiding exceeding max size of a data type
+//                popWorld = rset.getLong("worldPop")/10000;
+//                resultPercentage = popLanguage / popWorld;
+//                resultPercentage = (double)Math.round(resultPercentage * 100d) / 100d; // to 2 decimal places
+//                languageSpeakersPercentage.add(resultPercentage+"%");
             }
             return languageSpeakersPercentage;
         } catch (Exception e) {
