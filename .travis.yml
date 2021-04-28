@@ -25,9 +25,6 @@ branches:
 
 jobs:
   include:
-    - stage: unit tests
-      install: skip
-      jdk: oraclejdk11
       script: mvn test -Dtest=UnitTests
     - stage: integration tests
       jdk: oraclejdk11
@@ -50,7 +47,6 @@ jobs:
         skip_cleanup: true
 
 stages:
-  - unit tests
   - integration tests
   - name: deploy
     if: branch = master
