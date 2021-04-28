@@ -181,9 +181,9 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT"
+            String strSelect = "SELECT "
                     + "city.name as capital, country.name as country, city.population as population, city.district as district, city.id as id"
-                    + "FROM" + "(city join country on city.ID=country.capital)" + "ORDER BY" + "city.population desc" + "LIMIT "
+                    + " FROM " + "(city JOIN country ON city.ID=country.capital)" + " ORDER BY " + "city.population desc" + " LIMIT "
                     + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -216,11 +216,11 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT"
+            String strSelect = "SELECT "
                     + "city.name as capital, country.name as country, city.population as population, city.district as district, city.id as id"
-                    + "FROM" + "(city join country on city.ID=country.capital)"
-                    + "WHERE" + "country.continent" + "LIKE \"" + continent
-                    + "\" ORDER BY" + "city.population desc" + "LIMIT "
+                    + " FROM " + "(city JOIN country ON city.ID=country.capital)"
+                    + " WHERE" + " country.continent " + "LIKE \"" + continent
+                    + "\" ORDER BY " + "city.population desc" + " LIMIT "
                     + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -251,11 +251,11 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT"
+            String strSelect = "SELECT "
                     + "city.name as capital, country.name as country, city.population as population, city.district as district, city.id as id"
-                    + "FROM" + "(city join country on city.ID=country.capital)"
-                    + "WHERE" + "country.region" + "LIKE \"" + region
-                    + "\" ORDER BY" + "city.population desc" + "LIMIT "
+                    + " FROM " + "(city JOIN country ON city.ID=country.capital)"
+                    + " WHERE " + "country.region " + "LIKE \"" + region
+                    + "\" ORDER BY " + "city.population desc" + " LIMIT "
                     + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -287,33 +287,33 @@ public class SqlReturnsObjects {
             Statement stmt = con.createStatement();
 
             String strSelect =
-                    "SELECT" +
+                    "SELECT " +
                             "language" +
                             ",sum(language_speakers) AS speakers" +
-                            ",(SELECT" +
+                            ",(SELECT " +
                             "sum(population)" +
-                            "FROM" +
+                            " FROM " +
                             "country) AS worldPop" +
-                            "FROM" +
+                            " FROM " +
                             "(" +
-                            "SELECT" +
+                            " SELECT " +
                             "country.name AS name" +
                             ",countrylanguage.language AS language" +
                             ",countrylanguage.percentage AS percentage" +
                             ",country.population AS total_population" +
                             ",FLOOR(country.population*(countrylanguage.percentage/100)) AS language_speakers" +
-                            "FROM" +
+                            " FROM " +
                             "(countrylanguage JOIN country ON countrylanguage.countrycode=country.code)" +
-                            "WHERE" +
+                            " WHERE " +
                             "countrylanguage.percentage > 0" +
-                            "ORDER BY" +
+                            " ORDER BY " +
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
-                            "WHERE" +
+                            " WHERE " +
                             "language LIKE \"" + language +
-                            "\" GROUP BY" +
+                            "\" GROUP BY " +
                             "language" +
-                            "ORDER BY" +
+                            " ORDER BY " +
                             "sum(language_speakers) DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -342,14 +342,14 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "totalPop.continent AS continent" + ",total_population" + ",city_population"
-                    + ",(total_population-city_population) AS non_city_population" + "FROM" + "(SELECT" + "continent"
-                    + ",sum(population) AS total_population" + "FROM" + "country" + "GROUP BY" + "continent" + "ORDER BY"
-                    + "sum(population) DESC" + ") totalPop JOIN (" + "SELECT" + "continent"
-                    + ",sum(city.population) AS city_population" + "FROM" + "(city JOIN country ON city.CountryCode=country.code)"
-                    + "GROUP BY" + "continent" + "ORDER BY" + "sum(city.population) DESC"
-                    + ") cityPop ON totalPop.continent=cityPop.continent" + "WHERE" + "totalPop.continent LIKE \"" + continent
-                    + "\"" + "ORDER BY" + "total_population DESC;";
+            String strSelect = " SELECT " + "totalPop.continent AS continent" + ",total_population" + ",city_population"
+                    + ",(total_population-city_population) AS non_city_population" + " FROM " + "(SELECT " + "continent"
+                    + ",sum(population) AS total_population" + " FROM " + "country" + " GROUP BY " + "continent" + " ORDER BY "
+                    + "sum(population) DESC" + ") totalPop JOIN (" + " SELECT " + "continent"
+                    + ",sum(city.population) AS city_population" + " FROM " + "(city JOIN country ON city.CountryCode=country.code)"
+                    + " GROUP BY " + "continent" + " ORDER BY " + "sum(city.population) DESC"
+                    + ") cityPop ON totalPop.continent=cityPop.continent" + " WHERE " + "totalPop.continent LIKE \"" + continent
+                    + "\"" + " ORDER BY " + "total_population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<Long> popUrbanRural = new ArrayList<Long>();
@@ -377,14 +377,14 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "totalPop.region AS region" + ",total_population" + ",city_population"
-                    + ",(total_population-city_population) AS non_city_population" + "FROM" + "(SELECT" + "region"
-                    + ",sum(population) AS total_population" + "FROM" + "country" + "GROUP BY" + "region" + "ORDER BY"
-                    + "sum(population) DESC" + ") totalPop JOIN (" + "SELECT" + "region"
-                    + ",sum(city.population) AS city_population" + "FROM" + "(city JOIN country ON city.CountryCode=country.code)"
-                    + "GROUP BY" + "region" + "ORDER BY" + "sum(city.population) DESC"
-                    + ") cityPop ON totalPop.region=cityPop.region" + "WHERE" + "totalPop.region LIKE \"" + region + "\""
-                    + "ORDER BY" + "total_population DESC;";
+            String strSelect = "SELECT " + "totalPop.region AS region" + ",total_population" + ",city_population"
+                    + ",(total_population-city_population) AS non_city_population" + " FROM " + "(SELECT " + "region"
+                    + ",sum(population) AS total_population" + " FROM " + "country" + " GROUP BY " + "region" + " ORDER BY "
+                    + "sum(population) DESC" + ") totalPop JOIN (" + " SELECT " + "region"
+                    + ",sum(city.population) AS city_population" + " FROM " + "(city JOIN country ON city.CountryCode=country.code)"
+                    + " GROUP BY " + "region" + " ORDER BY " + "sum(city.population) DESC"
+                    + ") cityPop ON totalPop.region=cityPop.region" + " WHERE " + "totalPop.region LIKE \"" + region + "\""
+                    + " ORDER BY " + "total_population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<Long> popUrbanRural = new ArrayList<Long>();
@@ -412,13 +412,13 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "totalPop.name AS name" + ",total_population" + ",city_population"
-                    + ",(total_population-city_population) AS non_city_population" + "FROM" + "(SELECT" + "name"
-                    + ",sum(population) AS total_population" + "FROM" + "country" + "GROUP BY" + "name" + "ORDER BY"
-                    + "sum(population) DESC" + ") totalPop JOIN (" + "SELECT" + "country.name AS name"
-                    + ",sum(city.population) AS city_population" + "FROM" + "(city JOIN country ON city.CountryCode=country.code)"
-                    + "GROUP BY" + "country.name" + "ORDER BY" + "sum(city.population) DESC"
-                    + ") cityPop ON totalPop.name=cityPop.name" + "WHERE" + "totalPop.name LIKE \"" + country + "\"" + "ORDER BY"
+            String strSelect = " SELECT " + "totalPop.name AS name" + ",total_population" + ",city_population"
+                    + ",(total_population-city_population) AS non_city_population" + " FROM " + "(SELECT " + "name"
+                    + ",sum(population) AS total_population" + " FROM " + "country" + " GROUP BY " + "name" + " ORDER BY "
+                    + "sum(population) DESC" + ") totalPop JOIN (" + " SELECT " + "country.name AS name"
+                    + ",sum(city.population) AS city_population" + " FROM " + "(city JOIN country ON city.CountryCode=country.code)"
+                    + " GROUP BY " + "country.name" + " ORDER BY " + "sum(city.population) DESC"
+                    + ") cityPop ON totalPop.name=cityPop.name" + " WHERE " + "totalPop.name LIKE \"" + country + "\"" + " ORDER BY "
                     + "total_population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -444,7 +444,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "sum(population)" + "FROM" + "country;";
+            String strSelect = " SELECT " + "sum(population)" + " FROM " + "country;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -469,7 +469,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "sum(population)" + "FROM" + "country" + "WHERE" + "continent like \"" + continent
+            String strSelect = "SELECT " + "sum(population)" + " FROM " + "country" + " WHERE " + "continent LIKE \"" + continent
                     + "\";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -494,7 +494,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "sum(population)" + "FROM" + "country" + "WHERE" + "region like \"" + region
+            String strSelect = "SELECT " + "sum(population)" + " FROM " + "country" + " WHERE " + "region LIKE \"" + region
                     + "\";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -519,7 +519,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "population" + "FROM" + "country" + "WHERE" + "name like \"" + country + "\";";
+            String strSelect = "SELECT " + "population" + " FROM " + "country" + " WHERE " + "name LIKE \"" + country + "\";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -543,7 +543,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "sum(population)" + "FROM" + "city" + "WHERE" + "district like \"" + district
+            String strSelect = " SELECT " + "sum(population)" + " FROM " + "city" + " WHERE " + "district LIKE \"" + district
                     + "\";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -568,7 +568,7 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "population" + "FROM" + "city" + "WHERE" + "name like \"" + city + "\";";
+            String strSelect = " SELECT " + "population" + " FROM " + "city" + " WHERE " + "name LIKE \"" + city + "\";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -595,9 +595,9 @@ public class SqlReturnsObjects {
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT" + "city.name AS name" + ",city.population" + ",country.name AS country"
-                    + ",city.ID as ID" + ",city.district as district" + "FROM"
-                    + "(city JOIN country ON city.CountryCode=country.code)" + "ORDER BY" + "city.population DESC" + "LIMIT " + N
+            String strSelect = "SELECT " + "city.name AS name" + ",city.population" + ",country.name AS country"
+                    + ",city.ID as ID" + ",city.district as district" + " FROM "
+                    + "(city JOIN country ON city.CountryCode=country.code)" + " ORDER BY " + "city.population DESC" + " LIMIT " + N
                     + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -636,7 +636,7 @@ public class SqlReturnsObjects {
             String strSelect = "SELECT " + "city.name AS name " + ",city.population " + ",country.name AS country "
                     + ",city.ID as ID " + ",city.district as district " + "FROM "
                     + "(city JOIN country ON city.CountryCode=country.code) " + "WHERE " + "continent LIKE \"" + continent + "\" "
-                    + "ORDER BY" + "city.population DESC" + "LIMIT " + N + ";";
+                    + " ORDER BY " + "city.population DESC" + " LIMIT " + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<City> cityArrayList = new ArrayList<City>();
@@ -673,7 +673,7 @@ public class SqlReturnsObjects {
             String strSelect = "SELECT " + "city.name AS name " + ",city.population " + ",country.name AS country "
                     + ",city.ID as ID " + ",city.district as district " + "FROM "
                     + "(city JOIN country ON city.CountryCode=country.code) " + "WHERE " + "region LIKE \"" + region + "\" "
-                    + "ORDER BY" + "city.population DESC" + "LIMIT " + N + ";";
+                    + " ORDER BY " + "city.population DESC" + " LIMIT " + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<City> cityArrayList = new ArrayList<City>();
@@ -710,7 +710,7 @@ public class SqlReturnsObjects {
             String strSelect = "SELECT " + "city.name AS name " + ",city.population " + ",country.name AS country "
                     + ",city.ID as ID " + ",city.district as district " + "FROM "
                     + "(city JOIN country ON city.CountryCode=country.code) " + "WHERE " + "country.name LIKE \"" + country
-                    + "\" " + "ORDER BY" + "city.population DESC" + "LIMIT " + N + ";";
+                    + "\" " + " ORDER BY " + "city.population DESC" + " LIMIT " + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<City> cityArrayList = new ArrayList<City>();
@@ -747,7 +747,7 @@ public class SqlReturnsObjects {
             String strSelect = "SELECT " + "city.name AS name " + ",city.population " + ",country.name AS country "
                     + ",city.ID as ID " + ",city.district as district " + "FROM "
                     + "(city JOIN country ON city.CountryCode=country.code) " + "WHERE " + "city.district LIKE \"" + district
-                    + "\" " + "ORDER BY" + "city.population DESC" + "LIMIT " + N + ";";
+                    + "\" " + " ORDER BY " + "city.population DESC" + " LIMIT " + N + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
             ArrayList<City> cityArrayList = new ArrayList<City>();

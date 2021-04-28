@@ -20,36 +20,57 @@ public class App {
 
         db.getCountriesByWorld(con);
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCountriesByContinent(con, "Europe");
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCountriesByRegion(con, "Western Europe");
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCountriesInWorld(con, 5);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCountriesInContinent(con, "Europe", 6);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCountriesInRegion(con, "Western Europe", 7);
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCitiesInWorld(con);
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCitiesInContinent(con, "Europe");
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCitiesInRegion(con, "Western Europe");
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCitiesInCountry(con, "Laos");
         System.out.println("----------------------------------------------------------------------------");
+
         db.getCitiesInDistrict(con, "Viangchan");
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCities(con, 4);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCitiesInContinent(con, "Europe", 4);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCitiesInRegion(con, "Western Europe", 4);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCitiesInCountry(con, "Paraguay", 4);
         System.out.println("----------------------------------------------------------------------------");
+
         db.topNCitiesInDistrict(con, "Viangchan",4);
         System.out.println("----------------------------------------------------------------------------");
+
+        ArrayList<City> capitalCitiesByWorld = new ArrayList<City>();
+        capitalCitiesByWorld = second_db.getCapitalCitiesWorld(second_con, 4);
+        for(City c : capitalCitiesByWorld){
+            System.out.println(c);
+        }
 
         ArrayList<City> capitalCitiesByContinent = new ArrayList<City>();
         capitalCitiesByContinent = second_db.getCapitalCitiesContinent(second_con, "Europe", 4);
@@ -119,7 +140,7 @@ public class App {
 
         System.out.println("----------------------------------------------------------------------------");
 
-        System.out.println(second_db.getPopulationCity(second_con, "Rome"));
+        System.out.println(second_db.getPopulationCity(second_con, "Roma"));
 
         System.out.println("----------------------------------------------------------------------------");
 
@@ -146,45 +167,6 @@ public class App {
         }
 
         System.out.println("----------------------------------------------------------------------------");
-
-        ArrayList<City> citiesByPopulationCountry = new ArrayList<City>();
-        citiesByPopulationCountry = second_db.getCitiesByPopulationCountry(second_con, "Paraguay", 4);
-        for(City c : citiesByPopulationCountry){
-            System.out.println(c);
-        }
-
-        System.out.println("----------------------------------------------------------------------------");
-
-        ArrayList<City> citiesByPopulationDistrict = new ArrayList<City>();
-        citiesByPopulationDistrict = second_db.getCitiesByPopulationDistrict(second_con, "Viangchan", 4);
-        for(City c : citiesByPopulationDistrict){
-            System.out.println(c);
-        }
-
-        System.out.println("----------------------------------------------------------------------------");
-
-        ArrayList<Country> countriesByPopulationWorld = new ArrayList<Country>();
-        countriesByPopulationWorld = second_db.getCountriesByPopulationWorld(second_con, 4);
-        for(Country c : countriesByPopulationWorld){
-            System.out.println(c);
-        }
-
-        System.out.println("----------------------------------------------------------------------------");
-
-        ArrayList<Country> countriesByPopulationContinent = new ArrayList<Country>();
-        countriesByPopulationContinent = second_db.getCountriesByPopulationContinent(second_con,"Europe", 4);
-        for(Country c : countriesByPopulationContinent){
-            System.out.println(c);
-        }
-
-        System.out.println("----------------------------------------------------------------------------");
-
-        ArrayList<Country> countriesByPopulationRegion = new ArrayList<Country>();
-        countriesByPopulationRegion = second_db.getCountriesByPopulationRegion(second_con,"Western Europe", 4);
-        for(Country c : countriesByPopulationRegion){
-            System.out.println(c);
-        }
-
 
         db.disconnect();
         second_db.disconnect();
