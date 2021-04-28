@@ -5,6 +5,7 @@ Coursework for SET08103 SEM, for Napier University.
 - Master Build Status [![Build Status](https://travis-ci.com/MikhaRohrs/SEMCoursework.svg?branch=master)](https://travis-ci.com/MikhaRohrs/SEMCoursework)
 - Develop Build Status [![Build Status](https://travis-ci.com/MikhaRohrs/SEMCoursework.svg?branch=develop)](https://travis-ci.com/MikhaRohrs/SEMCoursework)
 - License [![LICENSE](https://img.shields.io/github/license/MikhaRohrs/SEMCoursework.svg?style=flat-square)](https://github.com/MikhaRohrs/SEMCoursework/blob/master/LICENSE)
+- Code coverage [![codecov](https://codecov.io/gh/MikhaRohrs/SEMCoursework/branch/master/graph/badge.svg?token=8XKVDCI9OC)](https://codecov.io/gh/MikhaRohrs/SEMCoursework)  
 - Release [![Releases](https://img.shields.io/github/release/MikhaRohrs/SEMCoursework/all.svg?style=flat-square)](https://github.com/MikhaRohrs/SEMCoursework/releases)
 
 
