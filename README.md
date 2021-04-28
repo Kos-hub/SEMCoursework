@@ -180,4 +180,4 @@ The population of a city.
 
 The number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population.
 
-![alt text](https://raw.githubusercontent.com/MikhaRohrs/SEMCoursework/feature/readme-report/report-images/SEM_r32.JPG "The number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population.")
+![alt text](https://raw.githubusercontent.com/MikhaRohrs/SEMCoursework/feature/readme-report/report-images/SEM_r32.png "The number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population.")
