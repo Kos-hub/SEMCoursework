@@ -89,10 +89,19 @@ public class App {
         System.out.println("----------------------------------------------------------------------------");
 
         ArrayList<Long> languageSpeakers = new ArrayList<Long>();
-        languageSpeakers = second_db.getLanguageSpeakers(second_con, "English");
-        for(Long l : languageSpeakers){
-            System.out.println(l);
+        ArrayList<String> languageList = new ArrayList<>();
+        languageList.add("Chinese");
+        languageList.add("English");
+        languageList.add("Hindi");
+        languageList.add("Spanish");
+        languageList.add("Arabic");
+        languageSpeakers = second_db.getLanguageSpeakers(second_con, languageList);
+        for (int i = 0; i < languageSpeakers.size(); i+=2) {
+            System.out.println(languageList.get(i/2));
+            System.out.println(languageSpeakers.get(i));
+            System.out.println((languageSpeakers.get(i)/languageSpeakers.get(i+1))*100+"%");
         }
+
 
         System.out.println("----------------------------------------------------------------------------");
 

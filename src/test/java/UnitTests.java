@@ -230,11 +230,15 @@ public class UnitTests {
     void testLanguageSpeakers() {
         // Normal input
         // Arrange & Act
-        ArrayList<Long> returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, "Chinese");
+        ArrayList<String> testLanguages = new ArrayList<>();
+        testLanguages.add("Chinese");
+        ArrayList<Long> returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, testLanguages);
         // Assert
         assertEquals(returnValue.get(0), 1191843539);
         // Act
-        returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, "Spanish");
+        testLanguages.remove(0);
+        testLanguages.add("Spanish");
+        returnValue = testSqlReturnsObjects.getLanguageSpeakers(con, testLanguages);
         // Assert
         assertEquals(returnValue.get(0), 355029460);
     }

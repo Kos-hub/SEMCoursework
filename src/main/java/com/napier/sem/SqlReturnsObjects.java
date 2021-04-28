@@ -282,7 +282,7 @@ public class SqlReturnsObjects {
      * @param language This method should take a language as a String argument.
      * @return This method returns an ArrayList containing 2 longs: the population followed by the world population, from which the percentage can be easily derived.
      */
-    public ArrayList<Long> getLanguageSpeakers(Connection con, String language) {
+    public ArrayList<Long> getLanguageSpeakers(Connection con, ArrayList<String> language) {
         try {
             Statement stmt = con.createStatement();
 
@@ -310,7 +310,14 @@ public class SqlReturnsObjects {
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
                             " WHERE " +
-                            "language LIKE \"" + language +
+                            "language LIKE \"";
+
+                            strSelect += language.get(0);
+                            for(int i = 1; i < language.size(); i++) {
+                                strSelect += "\" OR language LIKE \"" + language.get(i);
+                            }
+
+                            strSelect +=
                             "\" GROUP BY " +
                             "language" +
                             " ORDER BY " +
@@ -320,8 +327,8 @@ public class SqlReturnsObjects {
             ArrayList<Long> languageSpeakersPercentage = new ArrayList<Long>();
 
             while (rset.next()) {
-                languageSpeakersPercentage.add(0,rset.getLong("speakers"));
-                languageSpeakersPercentage.add(1,rset.getLong("worldPop"));
+                languageSpeakersPercentage.add(rset.getLong("speakers"));
+                languageSpeakersPercentage.add(rset.getLong("worldPop"));
             }
             return languageSpeakersPercentage;
         } catch (Exception e) {
