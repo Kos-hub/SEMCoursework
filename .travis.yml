@@ -25,7 +25,6 @@ branches:
 
 jobs:
   include:
-      script: mvn test -Dtest=UnitTests
     - stage: integration tests
       jdk: oraclejdk11
       script: mvn test -Dtest=IntegrationTest
