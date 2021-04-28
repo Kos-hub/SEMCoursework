@@ -287,30 +287,29 @@ public class SqlReturnsObjects {
             Statement stmt = con.createStatement();
 
             String strSelect =
-                    "SELECT " +
-                            "country.name AS name" +
-                            ",language" +
+                    "SELECT" +
+                            "language" +
                             ",sum(language_speakers) AS speakers" +
-                            ",(SELECT " +
+                            ",((sum(language_speakers) / (SELECT" +
                             "sum(population)" +
-                            " FROM " +
-                            "country) AS worldPop" +
-                            " FROM " +
+                            "FROM" +
+                            "country))*100) AS percentage" +
+                            "FROM" +
                             "(" +
-                            " SELECT " +
+                            "SELECT" +
                             "country.name AS name" +
                             ",countrylanguage.language AS language" +
                             ",countrylanguage.percentage AS percentage" +
                             ",country.population AS total_population" +
                             ",FLOOR(country.population*(countrylanguage.percentage/100)) AS language_speakers" +
-                            " FROM " +
+                            "FROM" +
                             "(countrylanguage JOIN country ON countrylanguage.countrycode=country.code)" +
-                            " WHERE " +
+                            "WHERE" +
                             "countrylanguage.percentage > 0" +
-                            " ORDER BY " +
+                            "ORDER BY" +
                             "(country.population*(countrylanguage.percentage/100)) DESC" +
                             ") languageSpeakers" +
-                            " WHERE " +
+                            "WHERE" +
                             "language LIKE \"";
 
                             strSelect += language.get(0);
@@ -319,9 +318,9 @@ public class SqlReturnsObjects {
                             }
 
                             strSelect +=
-                            "\" GROUP BY " +
+                            "GROUP BY" +
                             "language" +
-                            " ORDER BY " +
+                            "ORDER BY" +
                             "sum(language_speakers) DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -329,15 +328,18 @@ public class SqlReturnsObjects {
 
 
             while (rset.next()) {
-                languageSpeakersPercentage.add(rset.getString("name"));
-                long speakers = rset.getLong("speakers");
-                languageSpeakersPercentage.add(speakers+""); // Long to String hack
-                double popLanguage, popWorld, resultPercentage;
-                popLanguage = speakers/10000; // avoiding exceeding max size of a data type
-                popWorld = rset.getLong("worldPop")/10000;
-                resultPercentage = popLanguage / popWorld;
-                resultPercentage = (double)Math.round(resultPercentage * 100d) / 100d; // to 2 decimal places
-                languageSpeakersPercentage.add(resultPercentage+"%");
+                languageSpeakersPercentage.add(rset.getString("language"));
+                languageSpeakersPercentage.add(rset.getString("speakers"));
+                languageSpeakersPercentage.add(rset.getString("percentage"));
+//                languageSpeakersPercentage.add(rset.getString("name"));
+//                long speakers = rset.getLong("speakers");
+//                languageSpeakersPercentage.add(speakers+""); // Long to String hack
+//                double popLanguage, popWorld, resultPercentage;
+//                popLanguage = speakers/10000; // avoiding exceeding max size of a data type
+//                popWorld = rset.getLong("worldPop")/10000;
+//                resultPercentage = popLanguage / popWorld;
+//                resultPercentage = (double)Math.round(resultPercentage * 100d) / 100d; // to 2 decimal places
+//                languageSpeakersPercentage.add(resultPercentage+"%");
             }
             return languageSpeakersPercentage;
         } catch (Exception e) {

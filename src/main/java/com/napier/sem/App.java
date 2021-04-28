@@ -88,7 +88,7 @@ public class App {
 
         System.out.println("----------------------------------------------------------------------------");
 
-        ArrayList<String> languageSpeakers;
+        ArrayList<String> languageSpeakers = new ArrayList<>();
         ArrayList<String> languageList = new ArrayList<>();
         languageList.add("Chinese");
         languageList.add("English");
@@ -96,7 +96,7 @@ public class App {
         languageList.add("Spanish");
         languageList.add("Arabic");
         languageSpeakers = second_db.getLanguageSpeakers(second_con, languageList);
-        double popLanguage, popWorld, resultPercentage;
+//        double popLanguage, popWorld, resultPercentage;
         for (String outputLine : languageSpeakers) {
             System.out.println(outputLine);
         }
