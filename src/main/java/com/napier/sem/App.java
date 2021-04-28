@@ -5,7 +5,8 @@ import java.sql.*;
 
 public class App {
     /**
-     *
+     * This program needs you to set up a local docker sql container in order to work.
+     * Set the port to 3306 and everything will work.
      * @param args
      */
     public static void main(String[] args)
