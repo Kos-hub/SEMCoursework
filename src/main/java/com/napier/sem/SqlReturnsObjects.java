@@ -29,7 +29,7 @@ public class SqlReturnsObjects {
                 try
                 {
                     // Wait a bit for db to start set to 30000 for travis
-                    //Thread.sleep(30000);
+                    Thread.sleep(30000);
                     // Connect to database
                     con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
